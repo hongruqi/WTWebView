@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'WTWebView_Example' do
+  pod 'WTWebView', :path => '../'
+
+  target 'WTWebView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
