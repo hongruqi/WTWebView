@@ -1,0 +1,23 @@
+PODS:
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - WTWebView (0.1.0):
+    - NJKWebViewProgress
+
+DEPENDENCIES:
+  - WTWebView (from `../`)
+
+EXTERNAL SOURCES:
+  WTWebView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  WTWebView: 985a3413f5f580c197f92243bf699a7efa791c02
+
+PODFILE CHECKSUM: d5c67fd2600e7b82e08aef6d8382f6b4095c3713
+
+COCOAPODS: 1.3.0

@@ -7,8 +7,11 @@
 //
 
 #import "WTViewController.h"
+#import "WTWebViewController.h"
 
 @interface WTViewController ()
+
+@property (nonatomic, strong) UIButton *openWebView;
 
 @end
 
@@ -17,7 +20,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
 	// Do any additional setup after loading the view, typically from a nib.
+    self.openWebView = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, self.view.frame.size.height/2, 100, 50)];
+    [self.openWebView setTitle:@"OpenWebVC" forState:UIControlStateNormal];
+    [self.openWebView setBackgroundColor:[UIColor blackColor]];
+    [self.openWebView setTintColor:[UIColor blueColor]];
+    [self.openWebView addTarget:self action:@selector(openWebVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.openWebView];
+
+}
+
+- (void)openWebVC
+{
+    WTWebViewController *webVC = [[WTWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
+    webVC.webPageTitle = @"qihr";
+    [webVC setHideCloseButton:NO];
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

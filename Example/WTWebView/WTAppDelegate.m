@@ -7,12 +7,21 @@
 //
 
 #import "WTAppDelegate.h"
+#import "WTViewController.h"
 
 @implementation WTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIViewController *controllerA = [[WTViewController alloc]init];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controllerA];
+    //    [[XYPageNavigator instance] setRootNavigationController:nav];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

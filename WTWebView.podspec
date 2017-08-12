@@ -32,11 +32,11 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'WTWebView/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'WTWebView' => ['WTWebView/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'WTWebView' => ['WTWebView/Assets/*.png']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.frameworks = 'WebKit'
+    s.dependency 'NJKWebViewProgress'
 end

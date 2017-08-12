@@ -38,9 +38,9 @@
 
 /* Begin PBXFileReference section */
 		24D5EBE78C5C0D7499343497 /* Pods-WTWebView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTWebView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-WTWebView_Example/Pods-WTWebView_Example.release.xcconfig"; sourceTree = "<group>"; };
-		258CD541FFBFC948798A4700 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		258CD541FFBFC948798A4700 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3DF98427E499E27F94430A0B /* Pods-WTWebView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTWebView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WTWebView_Tests/Pods-WTWebView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		5308E312C944C23286BF17BD /* WTWebView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = WTWebView.podspec; path = ../WTWebView.podspec; sourceTree = "<group>"; };
+		5308E312C944C23286BF17BD /* WTWebView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WTWebView.podspec; path = ../WTWebView.podspec; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* WTWebView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTWebView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,7 +65,7 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E21DA1B77A1CFC8E5470459 /* Pods-WTWebView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTWebView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WTWebView_Example/Pods-WTWebView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		A66F008A34B2A97785565658 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		A66F008A34B2A97785565658 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E70F1D6A4A7CF7DE25F662E7 /* Pods_WTWebView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WTWebView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -250,6 +250,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "lbrsilva-allin";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = BMP99N9345;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -370,10 +373,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WTWebView_Example/Pods-WTWebView_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/NJKWebViewProgress/NJKWebViewProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/WTWebView/WTWebView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NJKWebViewProgress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WTWebView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +538,7 @@
 			baseConfigurationReference = 9E21DA1B77A1CFC8E5470459 /* Pods-WTWebView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BMP99N9345;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WTWebView/WTWebView-Prefix.pch";
 				INFOPLIST_FILE = "WTWebView/WTWebView-Info.plist";
@@ -548,6 +554,7 @@
 			baseConfigurationReference = 24D5EBE78C5C0D7499343497 /* Pods-WTWebView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BMP99N9345;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WTWebView/WTWebView-Prefix.pch";
 				INFOPLIST_FILE = "WTWebView/WTWebView-Info.plist";
