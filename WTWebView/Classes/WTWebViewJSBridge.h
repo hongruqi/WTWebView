@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@import WebKit;
 
-@interface WTWebViewJSBridge : NSObject
+@class WTWebView, WTWebViewController;
+
+@interface WTWebViewJSBridge : NSObject<WKScriptMessageHandler>
+
++ (void)registerHybridToolWithName:(NSString *)tooName toolClass:(Class)toolClass;
++ (BOOL)checkToolExistsWithName:(NSString *)toolName;
+- (instancetype)initWithWebView:(WTWebView *)webView viewController:(WTWebViewController *)viewController;
 
 @end

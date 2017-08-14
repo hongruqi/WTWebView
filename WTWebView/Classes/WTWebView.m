@@ -138,6 +138,11 @@
         _webkit.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
         [_webkit addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
         [_webkit addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+        
+        self.hybrid = [[WTWebViewJSBridge alloc] initWithWebView:self viewController:(WTWebViewController*)self.viewController];
+        WKUserContentController *userContentController = [[WKUserContentController alloc] init];
+        [userContentController addScriptMessageHandler:self.hybrid name:BridgeName];
+        configuration.userContentController = userContentController;
     }
     
     return _webkit;
