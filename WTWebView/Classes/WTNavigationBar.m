@@ -132,7 +132,6 @@ static const CGFloat edgeSpace =  15.0 / 2;
     }
     [button setTitle:barText forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-//    [button setTitleColor:HBColor333333 forState:UIControlStateNormal];
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
     [self addSubview:button];
     _leftButton = button;
@@ -154,7 +153,6 @@ static const CGFloat edgeSpace =  15.0 / 2;
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
     button.frame = CGRectMake(85.0 / 2, self.height - kNavigationBarHeight, size.width + textButtonMargin, kNavigationBarHeight);
     [button setTitle:title forState:UIControlStateNormal];
-//    [button setTitleColor:HBColor333333 forState:UIControlStateNormal];
     if (target && sel) {
         [button addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     }
@@ -170,7 +168,8 @@ static const CGFloat edgeSpace =  15.0 / 2;
     if (_rightButton) {
         [_rightButton removeFromSuperview];
     }
-    UIImage *normalImage = [UIImage imageNamed:image];
+    NSBundle *bundle = [NSBundle wt_webViewBundle];
+    UIImage *normalImage = [UIImage imageNamed:image inBundle:bundle compatibleWithTraitCollection:nil];
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake([[UIScreen mainScreen]bounds].size.width  - edgeSpace - imageButtonWidth, self.height - kNavigationBarHeight, imageButtonWidth, kNavigationBarHeight)];
     [button setImage:normalImage forState:UIControlStateNormal];
     [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];

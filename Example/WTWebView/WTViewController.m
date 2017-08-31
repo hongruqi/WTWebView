@@ -34,9 +34,12 @@
 
 - (void)openWebVC
 {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html"];
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html"];
+//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     WTWebViewController *webVC = [[WTWebViewController alloc] initWithURL:url];
+    webVC.hideRightButton = NO;
     webVC.webPageTitle = @"qihr";
     [webVC setHideCloseButton:NO];
     [self.navigationController pushViewController:webVC animated:YES];

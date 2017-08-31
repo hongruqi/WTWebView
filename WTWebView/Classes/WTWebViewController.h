@@ -16,7 +16,6 @@
 @property (nonatomic, assign) BOOL isLoginCallBack;
 @property (nonatomic, assign) BOOL loginSuccessRefreshView;//defalut yes
 @property (nonatomic, copy)   NSString* webPageTitle;
-@property (nonatomic, strong) NSURL *homeURL;
 @property (nonatomic, strong) UIView *progressView;
 @property (nonatomic, assign) CGFloat scrollOffSet;
 @property (nonatomic, assign) BOOL isTabbar;
@@ -39,13 +38,9 @@
  * Navigate to the given URL.
  */
 - (void)openURL:(NSURL*)URL;
-
-- (void)reloadHomeUrl;
-
 - (NSString *)getWebTitle;
 - (void)addDelegate:(id<WTWebViewControllerDelegate>)delegate;
 - (void)removeDelegate:(id<WTWebViewControllerDelegate>)delegate;
-
 
 @end
 

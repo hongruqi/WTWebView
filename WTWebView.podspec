@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WTWebView'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of WTWebView.'
+  s.version          = '1.0.0'
+  s.summary          = 'WTWebView is webkit Package'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/lbrsilva-allin/WTWebView'
+  s.homepage         = 'https://github.com/hongruqi/WTWebView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lbrsilva-allin' => 'hongru.qi@quvideo.com' }
-  s.source           = { :git => 'https://github.com/lbrsilva-allin/WTWebView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/hongruqi/WTWebView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
@@ -36,7 +36,5 @@ TODO: Add long description of the pod here.
     'WTWebView' => ['WTWebView/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
     s.frameworks = 'WebKit'
-    s.dependency 'NJKWebViewProgress'
 end

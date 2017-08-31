@@ -9,13 +9,11 @@
 #import "WTWebViewController.h"
 #import "WTNavigationBar.h"
 #import "UIView+WTExtend.h"
-#import "WTGoTopView.h"
 
-@interface WTWebViewController ()<UIScrollViewDelegate, WTWebViewDelegate, WTGoTopViewDelegate>
+@interface WTWebViewController ()<UIScrollViewDelegate, WTWebViewDelegate>
 {
-    WTGoTopView *_goTopView;
     NSURL *_loadingURL;
-
+    NSURL *_homeURL;
 }
 
 @property (nonatomic, assign) BOOL enablePageJump; // 允许跳转标识
@@ -36,7 +34,7 @@
 {
     self = [super init];
     if (self) {
-        self.homeURL = URL;
+        _homeURL = URL;
     }
     return self;
 }
@@ -45,16 +43,16 @@
 {
     [super viewDidLoad];
     [self.view addSubview:self.navigationBar];
-//    [self changeNavigationBarImage];
     self.navigationBar.titleLabel.text = _webPageTitle;
+    
     if (!self.hideRightButton) {
         [self.navigationBar setBarRightButtonItem:self selector:@selector(shareAction:) imageKey:@"ic_c2c_share"];
     }
+    
     if (!self.hideCloseButton) {
         [self.navigationBar setBarCloseTextButtonItem:self selector:@selector(popViewController) title:@"关闭"];
         self.navigationBar.closeButton.titleLabel.textColor = [UIColor redColor];
         [self.navigationBar.closeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//        self.navigationBar.closeButton.hidden = YES;
     }
     
     self.navigationBar.backgroundColor = [UIColor whiteColor];
@@ -81,12 +79,6 @@
     self.webView.delegate = self;
     self.webView.scrollView.delegate = self;
     
-    //返回顶部
-    _goTopView = [[WTGoTopView alloc] initWithFrame:CGRectMake(self.webView.viewWidth - 50, self.webView.bottom - 10 - 40, 40, 40)];
-    _goTopView.delegate = self;
-    _goTopView.hidden = YES;
-    [self.view addSubview:_goTopView];
-    
     _progressView = [[UIView alloc] init];
     if (self.isTabbar) {
         _progressView.frame = CGRectMake(0, statusBarHeight, 0, 3);
@@ -99,7 +91,6 @@
     // Do any additional setup after loading the view.
     if (_homeURL) {
         [self openURL:_homeURL];
-        //        [self setOverlayStatus:EOverlayStatusLoading labelText:nil];
     }
     
     [self.view bringSubviewToFront:self.navigationBar];
@@ -145,6 +136,21 @@
     }];
 }
 
+- (void)shareAction:(id) params {
+}
+
+- (void)addDelegate:(id<WTWebViewControllerDelegate>)delegate
+{
+    if (!self.delegates) {
+        self.delegates = @[].mutableCopy;
+    }
+    [self.delegates addObject:delegate];
+}
+
+- (void)removeDelegate:(id<WTWebViewControllerDelegate>)delegate
+{
+    [self.delegates removeObject:delegate];
+}
 - (void)popToPreviousViewController
 {
 //    __block BOOL shouldClose = YES;

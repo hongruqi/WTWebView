@@ -17,7 +17,6 @@
 @property (nonatomic, strong) WTWebViewJSBridge *hybrid;
 @property (nonatomic, strong) NSURL *loadingURL;
 @property (nonatomic, strong) JSContext *jsContext;
-
 // 记录首次加载耗时
 @property (nonatomic, strong) NSDate *startLoadingDate;
 @property (nonatomic, assign) BOOL firstLoadTimeLogged;
@@ -32,10 +31,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-#ifdef DEBUG
-        [[NSURLCache sharedURLCache] removeAllCachedResponses];
-#endif
-//        [self updateUserAgent];
+        [self updateUserAgent];
         [self createWebKit];
         [self addSubview:self.webkit];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -132,20 +128,37 @@
     if(_webkit == nil) {
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
         configuration.allowsInlineMediaPlayback = YES;
-        _webkit = [[WKWebView alloc] initWithFrame:self.bounds configuration:configuration];
-        _webkit.UIDelegate = self;
-        _webkit.navigationDelegate = self;
-        _webkit.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-        [_webkit addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-        [_webkit addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
-        
         self.hybrid = [[WTWebViewJSBridge alloc] initWithWebView:self viewController:(WTWebViewController*)self.viewController];
         WKUserContentController *userContentController = [[WKUserContentController alloc] init];
         [userContentController addScriptMessageHandler:self.hybrid name:BridgeName];
         configuration.userContentController = userContentController;
+        _webkit = [[WKWebView alloc] initWithFrame:self.bounds configuration:configuration];
+        _webkit.UIDelegate = self;
+        _webkit.navigationDelegate = self;
+        _webkit.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+        _webkit.allowsBackForwardNavigationGestures = YES;
+        [_webkit addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+        [_webkit addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     }
     
     return _webkit;
+}
+
+- (void)updateUserAgent
+{
+    if([UIDevice currentDevice].systemVersion.floatValue >= 9.0){
+        self.webkit.customUserAgent = [NSString stringWithFormat:@"%@", @"extra_user_agent"];
+    }else{
+        // 获取默认User-Agent
+        [self.webkit evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError *error) {
+            NSString *oldAgent = result;
+            // 给User-Agent添加额外的信息
+            NSString *newAgent = [NSString stringWithFormat:@"%@;%@", oldAgent, @"extra_user_agent"];
+            // 设置global User-Agent
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:newAgent, @"UserAgent", nil];
+            [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+        }];
+    }
 }
 
 #pragma mark - JS
@@ -220,8 +233,8 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
     BOOL allow = YES;
-    if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:frame:)]) {
-        allow = [self.delegate webView:self shouldStartLoadWithRequest:navigationAction.request navigationType:(UIWebViewNavigationType)navigationAction.navigationType frame:navigationAction.sourceFrame.isMainFrame ? WTFrameMainFrame : WTFrameIFrame];
+    if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:)]) {
+        allow = [self.delegate webView:self shouldStartLoadWithRequest:navigationAction.request];
     }
     if (allow) {
         if (navigationAction.sourceFrame.isMainFrame) {
@@ -297,7 +310,7 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                              message:message
                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定"
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                                         style:UIAlertActionStyleCancel
                                                       handler:^(UIAlertAction *action) {
                                                           completionHandler();

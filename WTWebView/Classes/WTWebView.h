@@ -9,13 +9,7 @@
 #import <UIKit/UIKit.h>
 @import JavaScriptCore;
 
-static NSString *BridgeName = @"WebViewJavascriptBridge";
-
-typedef NS_ENUM(NSInteger, WTFrame) {
-    WTFrameUnKnown,
-    WTFrameMainFrame,
-    WTFrameIFrame
-};
+static NSString *BridgeName = @"jsCallOC";
 
 @protocol WTWebViewJavascriptBridge <JSExport>
 
@@ -56,7 +50,7 @@ typedef NS_ENUM(NSInteger, WTFrame) {
 @protocol WTWebViewDelegate <NSObject>
 
 @optional
-- (BOOL)webView:(WTWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType frame:(WTFrame)frame;
+- (BOOL)webView:(WTWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request;
 - (void)webViewDidStartLoad:(WTWebView *)webView;
 - (void)webViewDidFinishLoad:(WTWebView *)webView;
 - (void)webView:(WTWebView *)webView didFailLoadWithError:(NSError *)error;

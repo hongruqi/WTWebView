@@ -13,8 +13,8 @@
 
 @interface WTWebViewJSBridge : NSObject<WKScriptMessageHandler>
 
-+ (void)registerHybridToolWithName:(NSString *)tooName toolClass:(Class)toolClass;
-+ (BOOL)checkToolExistsWithName:(NSString *)toolName;
++ (void)registerHybridActionWithName:(NSString *)actionName actionClass:(Class)actionClass;
++ (BOOL)checkActionExistsWithName:(NSString *)actionName;
 - (instancetype)initWithWebView:(WTWebView *)webView viewController:(WTWebViewController *)viewController;
 
 @end
