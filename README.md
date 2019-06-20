@@ -22,7 +22,6 @@ pod "WTWebView"
 
 ## Author
 
-lbrsilva-allin, hongru.qi@quvideo.com
 
 ## License
 
